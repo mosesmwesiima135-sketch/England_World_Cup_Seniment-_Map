@@ -1,0 +1,1601 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_587459937c6919e9474dbc8190c8fe4f {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+     <h3 align="center" style="font-size:18px; font-family:Arial;">
+     <b>England Fan Sentiment by Location — World Cup 2026</b>
+     </h3>
+     
+    
+            <div class="folium-map" id="map_587459937c6919e9474dbc8190c8fe4f" ></div>
+        
+    
+<div style="
+    position: fixed;
+    bottom: 30px;
+    left: 30px;
+    z-index: 9999;
+    background-color: white;
+    border: 2px solid grey;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-family: Arial, sans-serif;
+    font-size: 14px;
+    box-shadow: 2px 2px 6px rgba(0,0,0,0.3);">
+  <b>Sentiment</b><br>
+  <i style="background:green; width:12px; height:12px; display:inline-block; border-radius:50%; margin-right:6px;"></i> Celebratory<br>
+  <i style="background:gray; width:12px; height:12px; display:inline-block; border-radius:50%; margin-right:6px;"></i> Neutral<br>
+  <i style="background:red; width:12px; height:12px; display:inline-block; border-radius:50%; margin-right:6px;"></i> Disappointed<br>
+  <hr style="margin:6px 0;">
+  <span style="font-size:12px; color:#555;">
+    Numbered circles = clusters of nearby videos.<br>
+    Click a marker for the video title.
+  </span>
+</div>
+</body>
+<script>
+    
+    
+            var map_587459937c6919e9474dbc8190c8fe4f = L.map(
+                "map_587459937c6919e9474dbc8190c8fe4f",
+                {
+                    center: [52.8, -1.5],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 6,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_07b5a3a4ae29789a7f3212664a8494d8 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_07b5a3a4ae29789a7f3212664a8494d8.addTo(map_587459937c6919e9474dbc8190c8fe4f);
+        
+    
+            var marker_cluster_27a63af92ed21754426a0651f1a87637 = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_42b5672a9d62ef97daf15b3d35374d46 = L.marker(
+                [50.8192573, -0.1364469],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_0ed7073d3a0eeed3e70fbea6cf88e214 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ec8ebf3afe3eafc79dc38ca58e9e579d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3dfdef0e60f5ab9815ffd00115a7d852 = $(`<div id="html_3dfdef0e60f5ab9815ffd00115a7d852" style="width: 100.0%; height: 100.0%;"><b>Brighton Beach</b><br>Sentiment: Celebratory<br>Title: CRAZY SCENES 🙌 England fans on Brighton Beach GO WILD as England beat DR Congo 2-1 🏆 2026 World Cup</div>`)[0];
+                popup_ec8ebf3afe3eafc79dc38ca58e9e579d.setContent(html_3dfdef0e60f5ab9815ffd00115a7d852);
+            
+        
+
+        marker_42b5672a9d62ef97daf15b3d35374d46.bindPopup(popup_ec8ebf3afe3eafc79dc38ca58e9e579d)
+        ;
+
+        
+    
+    
+            marker_42b5672a9d62ef97daf15b3d35374d46.bindTooltip(
+                `<div>
+                     Brighton Beach — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_42b5672a9d62ef97daf15b3d35374d46.setIcon(icon_0ed7073d3a0eeed3e70fbea6cf88e214);
+            
+    
+            var marker_62830881ae4c8a7fac56255bf622d443 = L.marker(
+                [51.5607487, -0.2801476],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_d967a8b78770767bd43d4e2e04b216ea = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_a167150ccd1fb6fc2104e1cfe4f54a31 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_c9c27cf625f9e9c5da9aafd8ada2f314 = $(`<div id="html_c9c27cf625f9e9c5da9aafd8ada2f314" style="width: 100.0%; height: 100.0%;"><b>BOXPARK Wembley</b><br>Sentiment: Celebratory<br>Title: CRAZY SCENES 🙌 England fans at BOXPARK Wembley GO WILD as England beat Panama 2-0 🏆 2026 World Cup</div>`)[0];
+                popup_a167150ccd1fb6fc2104e1cfe4f54a31.setContent(html_c9c27cf625f9e9c5da9aafd8ada2f314);
+            
+        
+
+        marker_62830881ae4c8a7fac56255bf622d443.bindPopup(popup_a167150ccd1fb6fc2104e1cfe4f54a31)
+        ;
+
+        
+    
+    
+            marker_62830881ae4c8a7fac56255bf622d443.bindTooltip(
+                `<div>
+                     BOXPARK Wembley — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_62830881ae4c8a7fac56255bf622d443.setIcon(icon_d967a8b78770767bd43d4e2e04b216ea);
+            
+    
+            var marker_6efb7ee966b0681d4decae53a9744412 = L.marker(
+                [51.5607487, -0.2801476],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_60154b5d8b0a323d95da935fb40dc646 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_8a28f2180c24f5c71e6c8d4954b9045a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_560d002f6258d5e73e6826ec54948a29 = $(`<div id="html_560d002f6258d5e73e6826ec54948a29" style="width: 100.0%; height: 100.0%;"><b>BOXPARK Wembley</b><br>Sentiment: Celebratory<br>Title: CRAZY SCENES 🙌 England fans at BOXPARK Wembley GO WILD as England beat Mexico 3-2 🏆 2026 World Cup</div>`)[0];
+                popup_8a28f2180c24f5c71e6c8d4954b9045a.setContent(html_560d002f6258d5e73e6826ec54948a29);
+            
+        
+
+        marker_6efb7ee966b0681d4decae53a9744412.bindPopup(popup_8a28f2180c24f5c71e6c8d4954b9045a)
+        ;
+
+        
+    
+    
+            marker_6efb7ee966b0681d4decae53a9744412.bindTooltip(
+                `<div>
+                     BOXPARK Wembley — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6efb7ee966b0681d4decae53a9744412.setIcon(icon_60154b5d8b0a323d95da935fb40dc646);
+            
+    
+            var marker_2ee8e9371753bdc22a7cae536df45a5e = L.marker(
+                [50.8192573, -0.1364469],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_91bb44a2608ed21ffb3d4a46096175e3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_196251d12448a45657e3da27f6c5ec1b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_73d7b0fefe2eb2577bfb0d26071ae065 = $(`<div id="html_73d7b0fefe2eb2577bfb0d26071ae065" style="width: 100.0%; height: 100.0%;"><b>Brighton Beach</b><br>Sentiment: Celebratory<br>Title: CRAZY SCENES 🙌 England beat Norway 2-1 as fans at Brighton Beach GO WILD 🏆 2026 World Cup</div>`)[0];
+                popup_196251d12448a45657e3da27f6c5ec1b.setContent(html_73d7b0fefe2eb2577bfb0d26071ae065);
+            
+        
+
+        marker_2ee8e9371753bdc22a7cae536df45a5e.bindPopup(popup_196251d12448a45657e3da27f6c5ec1b)
+        ;
+
+        
+    
+    
+            marker_2ee8e9371753bdc22a7cae536df45a5e.bindTooltip(
+                `<div>
+                     Brighton Beach — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2ee8e9371753bdc22a7cae536df45a5e.setIcon(icon_91bb44a2608ed21ffb3d4a46096175e3);
+            
+    
+            var marker_e645b12a47442eacc69219540a9a1614 = L.marker(
+                [51.3749986, -0.0937636],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_b7eb80f8186fec8caaea1886f3127388 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_97295279e5a737181c936b9b8aceff4e = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3fb67779f38694db923733347a5731b0 = $(`<div id="html_3fb67779f38694db923733347a5731b0" style="width: 100.0%; height: 100.0%;"><b>BOXPARK Croydon</b><br>Sentiment: Neutral<br>Title: England vs Croatia FIFA World Cup 2026 | BOXPARK Croydon Fan Zone &amp; YouTube Creator Collective</div>`)[0];
+                popup_97295279e5a737181c936b9b8aceff4e.setContent(html_3fb67779f38694db923733347a5731b0);
+            
+        
+
+        marker_e645b12a47442eacc69219540a9a1614.bindPopup(popup_97295279e5a737181c936b9b8aceff4e)
+        ;
+
+        
+    
+    
+            marker_e645b12a47442eacc69219540a9a1614.bindTooltip(
+                `<div>
+                     BOXPARK Croydon — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_e645b12a47442eacc69219540a9a1614.setIcon(icon_b7eb80f8186fec8caaea1886f3127388);
+            
+    
+            var marker_315073b9ffe6726e65b14e99958ca45e = L.marker(
+                [53.8014973, -1.548347],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_1ea581c4143d8d4b6097c4521b0c7a74 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_7c4f484b178d23dde3dd162acbcd5279 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b33bd6e294a84e8cf3e392b842353620 = $(`<div id="html_b33bd6e294a84e8cf3e392b842353620" style="width: 100.0%; height: 100.0%;"><b>Millennium Square</b><br>Sentiment: Disappointed<br>Title: ENGLAND FANS DEVASTATED 💔 2-1 loss to Argentina rocks fans in Leeds 🏆 2026 FIFA World Cup</div>`)[0];
+                popup_7c4f484b178d23dde3dd162acbcd5279.setContent(html_b33bd6e294a84e8cf3e392b842353620);
+            
+        
+
+        marker_315073b9ffe6726e65b14e99958ca45e.bindPopup(popup_7c4f484b178d23dde3dd162acbcd5279)
+        ;
+
+        
+    
+    
+            marker_315073b9ffe6726e65b14e99958ca45e.bindTooltip(
+                `<div>
+                     Millennium Square — disappointed
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_315073b9ffe6726e65b14e99958ca45e.setIcon(icon_1ea581c4143d8d4b6097c4521b0c7a74);
+            
+    
+            var marker_1508edf84f29c215cd83e2f3dc3766a1 = L.marker(
+                [53.4807593, -2.2426305],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_08b656c75278b225fa071971488915d8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_edab3c94f197d74304b27f4ea3ecfbdf = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_35a38189896f13f83d4d167107768107 = $(`<div id="html_35a38189896f13f83d4d167107768107" style="width: 100.0%; height: 100.0%;"><b>Manchester</b><br>Sentiment: Celebratory<br>Title: CRAZY SCENES 🙌 England fans in Manchester GO WILD as England beat Croatia 4-2 in World Cup opener 🏆</div>`)[0];
+                popup_edab3c94f197d74304b27f4ea3ecfbdf.setContent(html_35a38189896f13f83d4d167107768107);
+            
+        
+
+        marker_1508edf84f29c215cd83e2f3dc3766a1.bindPopup(popup_edab3c94f197d74304b27f4ea3ecfbdf)
+        ;
+
+        
+    
+    
+            marker_1508edf84f29c215cd83e2f3dc3766a1.bindTooltip(
+                `<div>
+                     Manchester — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1508edf84f29c215cd83e2f3dc3766a1.setIcon(icon_08b656c75278b225fa071971488915d8);
+            
+    
+            var marker_1c4f5a33199cfcfb1fe71311a7a7d690 = L.marker(
+                [50.8192573, -0.1364469],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_0586c1d2b775f3a6069578c481d5a8b8 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_05853057c528e8531145016f19ac1b5b = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_9aeba976a86bf5521ae40a8828e66277 = $(`<div id="html_9aeba976a86bf5521ae40a8828e66277" style="width: 100.0%; height: 100.0%;"><b>Brighton Beach</b><br>Sentiment: Neutral<br>Title: England fans on Brighton Beach react to England 2-1 DR Congo | 2026 FIFA World Cup</div>`)[0];
+                popup_05853057c528e8531145016f19ac1b5b.setContent(html_9aeba976a86bf5521ae40a8828e66277);
+            
+        
+
+        marker_1c4f5a33199cfcfb1fe71311a7a7d690.bindPopup(popup_05853057c528e8531145016f19ac1b5b)
+        ;
+
+        
+    
+    
+            marker_1c4f5a33199cfcfb1fe71311a7a7d690.bindTooltip(
+                `<div>
+                     Brighton Beach — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_1c4f5a33199cfcfb1fe71311a7a7d690.setIcon(icon_0586c1d2b775f3a6069578c481d5a8b8);
+            
+    
+            var marker_6196704470e4e2487149b42d78dda80e = L.marker(
+                [51.5072178, -0.1275862],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_20b1fe8e8cbd2b42f71d27de5ee8d9dd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_74397fe76f01240a6aaaf6a9358fc5e8 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6b2fe2bb74dd8595d04826463d53d300 = $(`<div id="html_6b2fe2bb74dd8595d04826463d53d300" style="width: 100.0%; height: 100.0%;"><b>London</b><br>Sentiment: Celebratory<br>Title: “Best England Performance In My Lifetime” | England Beat Mexico At Azteca World Cup 2026</div>`)[0];
+                popup_74397fe76f01240a6aaaf6a9358fc5e8.setContent(html_6b2fe2bb74dd8595d04826463d53d300);
+            
+        
+
+        marker_6196704470e4e2487149b42d78dda80e.bindPopup(popup_74397fe76f01240a6aaaf6a9358fc5e8)
+        ;
+
+        
+    
+    
+            marker_6196704470e4e2487149b42d78dda80e.bindTooltip(
+                `<div>
+                     London — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_6196704470e4e2487149b42d78dda80e.setIcon(icon_20b1fe8e8cbd2b42f71d27de5ee8d9dd);
+            
+    
+            var marker_2b51af89f2d47bde8c8fa5defc27fbbd = L.marker(
+                [51.5607487, -0.2801476],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_be9bf5dc5038d35fc265461ab74d8de0 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_da9f4e8b2c54dd2b20ac3e48499d8a23 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_14c3c7454a609d41c322a0c2cea00b15 = $(`<div id="html_14c3c7454a609d41c322a0c2cea00b15" style="width: 100.0%; height: 100.0%;"><b>BOXPARK Wembley</b><br>Sentiment: Celebratory<br>Title: CRAZY SCENES 🙌 England beat Norway 2-1 as fans at BOXPARK Wembley GO WILD 🏆 2026 World Cup</div>`)[0];
+                popup_da9f4e8b2c54dd2b20ac3e48499d8a23.setContent(html_14c3c7454a609d41c322a0c2cea00b15);
+            
+        
+
+        marker_2b51af89f2d47bde8c8fa5defc27fbbd.bindPopup(popup_da9f4e8b2c54dd2b20ac3e48499d8a23)
+        ;
+
+        
+    
+    
+            marker_2b51af89f2d47bde8c8fa5defc27fbbd.bindTooltip(
+                `<div>
+                     BOXPARK Wembley — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_2b51af89f2d47bde8c8fa5defc27fbbd.setIcon(icon_be9bf5dc5038d35fc265461ab74d8de0);
+            
+    
+            var marker_92988fa78dc37c4f1de97b94c1b8a7ea = L.marker(
+                [51.5607487, -0.2801476],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_04b68d6942372f8c18623925b8575d66 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_04e15a2482e63ddb7baa582d7ef16874 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_48ace78c5c5d21bbe2d55f0ec043adad = $(`<div id="html_48ace78c5c5d21bbe2d55f0ec043adad" style="width: 100.0%; height: 100.0%;"><b>BOXPARK Wembley</b><br>Sentiment: Celebratory<br>Title: BELLINGHAM SENDS BOXPARK WEMBLEY WILD! 🏴󠁧󠁢󠁥󠁮󠁧󠁿 Norway 1-1 England 🏆 2026 FIFA World Cup</div>`)[0];
+                popup_04e15a2482e63ddb7baa582d7ef16874.setContent(html_48ace78c5c5d21bbe2d55f0ec043adad);
+            
+        
+
+        marker_92988fa78dc37c4f1de97b94c1b8a7ea.bindPopup(popup_04e15a2482e63ddb7baa582d7ef16874)
+        ;
+
+        
+    
+    
+            marker_92988fa78dc37c4f1de97b94c1b8a7ea.bindTooltip(
+                `<div>
+                     BOXPARK Wembley — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_92988fa78dc37c4f1de97b94c1b8a7ea.setIcon(icon_04b68d6942372f8c18623925b8575d66);
+            
+    
+            var marker_5a78143854cd1f342f262fd1719ff7d8 = L.marker(
+                [51.3749986, -0.0937636],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_7d1234b782faf3b2f8ba54e36db15063 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_efd72c03265206ff34ac34a0c42a7c62 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8a9f1af273b10a87d746a8badbd5e8f3 = $(`<div id="html_8a9f1af273b10a87d746a8badbd5e8f3" style="width: 100.0%; height: 100.0%;"><b>BOXPARK Croydon</b><br>Sentiment: Disappointed<br>Title: ENGLAND FANS DEVASTATED 💔 BOXPARK Croydon watches late Argentina comeback 🏆 2026 FIFA World Cup</div>`)[0];
+                popup_efd72c03265206ff34ac34a0c42a7c62.setContent(html_8a9f1af273b10a87d746a8badbd5e8f3);
+            
+        
+
+        marker_5a78143854cd1f342f262fd1719ff7d8.bindPopup(popup_efd72c03265206ff34ac34a0c42a7c62)
+        ;
+
+        
+    
+    
+            marker_5a78143854cd1f342f262fd1719ff7d8.bindTooltip(
+                `<div>
+                     BOXPARK Croydon — disappointed
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5a78143854cd1f342f262fd1719ff7d8.setIcon(icon_7d1234b782faf3b2f8ba54e36db15063);
+            
+    
+            var marker_be149d1bc16e6d8c28637c81d510f74d = L.marker(
+                [51.5074256, -0.1271814],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_0f1391ab1f4c82c2de56438ac6fbfec1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dc3e484f8908a07a1c6d206bad7962db = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4d8f280979c66804ec0481d454f73b53 = $(`<div id="html_4d8f280979c66804ec0481d454f73b53" style="width: 100.0%; height: 100.0%;"><b>Central London</b><br>Sentiment: Neutral<br>Title: Central London Before England World Cup Match ⚽️ West End Summer Dusk Walk 2026 [4K HDR]</div>`)[0];
+                popup_dc3e484f8908a07a1c6d206bad7962db.setContent(html_4d8f280979c66804ec0481d454f73b53);
+            
+        
+
+        marker_be149d1bc16e6d8c28637c81d510f74d.bindPopup(popup_dc3e484f8908a07a1c6d206bad7962db)
+        ;
+
+        
+    
+    
+            marker_be149d1bc16e6d8c28637c81d510f74d.bindTooltip(
+                `<div>
+                     Central London — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_be149d1bc16e6d8c28637c81d510f74d.setIcon(icon_0f1391ab1f4c82c2de56438ac6fbfec1);
+            
+    
+            var marker_16d772ee128135a091a74f652efbc1e8 = L.marker(
+                [51.5072178, -0.1275862],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_77a4b084d58debae636dfe654014d616 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_97eda7334bdb792df236e7488b09e13a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_da780775d6efdd3772d36f2d7ac2327c = $(`<div id="html_da780775d6efdd3772d36f2d7ac2327c" style="width: 100.0%; height: 100.0%;"><b>London</b><br>Sentiment: Neutral<br>Title: London EXPLODES After England&#39;s 1-2 Defeat to Argentina | World Cup</div>`)[0];
+                popup_97eda7334bdb792df236e7488b09e13a.setContent(html_da780775d6efdd3772d36f2d7ac2327c);
+            
+        
+
+        marker_16d772ee128135a091a74f652efbc1e8.bindPopup(popup_97eda7334bdb792df236e7488b09e13a)
+        ;
+
+        
+    
+    
+            marker_16d772ee128135a091a74f652efbc1e8.bindTooltip(
+                `<div>
+                     London — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_16d772ee128135a091a74f652efbc1e8.setIcon(icon_77a4b084d58debae636dfe654014d616);
+            
+    
+            var marker_473bc6848b7f6c2cdd960be14bfe6b9e = L.marker(
+                [51.5072178, -0.1275862],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_354ca037f082cc6344811d28a87fe90f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9d9817ae81bd2eaf8fcfabf1c65fc817 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_09dd4673555038753ad059a2ab250289 = $(`<div id="html_09dd4673555038753ad059a2ab250289" style="width: 100.0%; height: 100.0%;"><b>London</b><br>Sentiment: Celebratory<br>Title: London ERUPTS After England Win! Police Forced to Intervene | World Cup</div>`)[0];
+                popup_9d9817ae81bd2eaf8fcfabf1c65fc817.setContent(html_09dd4673555038753ad059a2ab250289);
+            
+        
+
+        marker_473bc6848b7f6c2cdd960be14bfe6b9e.bindPopup(popup_9d9817ae81bd2eaf8fcfabf1c65fc817)
+        ;
+
+        
+    
+    
+            marker_473bc6848b7f6c2cdd960be14bfe6b9e.bindTooltip(
+                `<div>
+                     London — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_473bc6848b7f6c2cdd960be14bfe6b9e.setIcon(icon_354ca037f082cc6344811d28a87fe90f);
+            
+    
+            var marker_65cd3bcebbcdc4081e98197525738f06 = L.marker(
+                [51.5607487, -0.2801476],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_f87e98df6cb6afc1f9149cff82aefd45 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3487c66a09ddcd5340471a2a245acf12 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_3935a6ab3574a5f2b22a3d55c34bf8e8 = $(`<div id="html_3935a6ab3574a5f2b22a3d55c34bf8e8" style="width: 100.0%; height: 100.0%;"><b>BOXPARK Wembley</b><br>Sentiment: Celebratory<br>Title: 🔴 LIVE | PANAMA 🇵🇦 0-2 🏴󠁧󠁢󠁥󠁮󠁧󠁿 ENGLAND WATCH PARTY! 👀 Fans react at BOXPARK Wembley</div>`)[0];
+                popup_3487c66a09ddcd5340471a2a245acf12.setContent(html_3935a6ab3574a5f2b22a3d55c34bf8e8);
+            
+        
+
+        marker_65cd3bcebbcdc4081e98197525738f06.bindPopup(popup_3487c66a09ddcd5340471a2a245acf12)
+        ;
+
+        
+    
+    
+            marker_65cd3bcebbcdc4081e98197525738f06.bindTooltip(
+                `<div>
+                     BOXPARK Wembley — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_65cd3bcebbcdc4081e98197525738f06.setIcon(icon_f87e98df6cb6afc1f9149cff82aefd45);
+            
+    
+            var marker_c30191b7077c30a0eca33d81fea9f317 = L.marker(
+                [51.5072178, -0.1275862],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_d64e3f4a499b27bb41813621290d9b99 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9b26fc325b87d0ac9613654e5696baea = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dc210a3d34c2ee8505dfe9b317b0f0ab = $(`<div id="html_dc210a3d34c2ee8505dfe9b317b0f0ab" style="width: 100.0%; height: 100.0%;"><b>London</b><br>Sentiment: Neutral<br>Title: England&#39;s &#39;most patriotic estate&#39; puts up SCOTLAND flags for World Cup | SWNS</div>`)[0];
+                popup_9b26fc325b87d0ac9613654e5696baea.setContent(html_dc210a3d34c2ee8505dfe9b317b0f0ab);
+            
+        
+
+        marker_c30191b7077c30a0eca33d81fea9f317.bindPopup(popup_9b26fc325b87d0ac9613654e5696baea)
+        ;
+
+        
+    
+    
+            marker_c30191b7077c30a0eca33d81fea9f317.bindTooltip(
+                `<div>
+                     London — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c30191b7077c30a0eca33d81fea9f317.setIcon(icon_d64e3f4a499b27bb41813621290d9b99);
+            
+    
+            var marker_20122b6fc539898e0f38b68c556f3d3c = L.marker(
+                [51.5072178, -0.1275862],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_13ba529b8b1f40870c73b11548db013a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_09d0ba58979583773d36349d46e82c53 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d526150d02bf014173af5b17d2bf2bb9 = $(`<div id="html_d526150d02bf014173af5b17d2bf2bb9" style="width: 100.0%; height: 100.0%;"><b>Londres</b><br>Sentiment: Neutral<br>Title: 🇦🇷 FANS ARGENTINA en🇬🇧 UNITED KINGDOM LONDON😃👍🇦🇷 MI AMOR MUNDIAL 🇦🇷 013/100 escúchalo completo! 💙🥹👍</div>`)[0];
+                popup_09d0ba58979583773d36349d46e82c53.setContent(html_d526150d02bf014173af5b17d2bf2bb9);
+            
+        
+
+        marker_20122b6fc539898e0f38b68c556f3d3c.bindPopup(popup_09d0ba58979583773d36349d46e82c53)
+        ;
+
+        
+    
+    
+            marker_20122b6fc539898e0f38b68c556f3d3c.bindTooltip(
+                `<div>
+                     Londres — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_20122b6fc539898e0f38b68c556f3d3c.setIcon(icon_13ba529b8b1f40870c73b11548db013a);
+            
+    
+            var marker_17a3df3b6f05eed607511f79dccf4713 = L.marker(
+                [51.5072178, -0.1275862],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_e4e722a8754bd5236884ffa18abc34a3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_4935bad410c57a784c564855893c0758 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_8d99f2347549080a1bfb4397553a2a35 = $(`<div id="html_8d99f2347549080a1bfb4397553a2a35" style="width: 100.0%; height: 100.0%;"><b>London</b><br>Sentiment: Neutral<br>Title: Ciyaarta Spain vs Argentina World Cup Final iyo Dabaaldagii Somalida London 😁👏</div>`)[0];
+                popup_4935bad410c57a784c564855893c0758.setContent(html_8d99f2347549080a1bfb4397553a2a35);
+            
+        
+
+        marker_17a3df3b6f05eed607511f79dccf4713.bindPopup(popup_4935bad410c57a784c564855893c0758)
+        ;
+
+        
+    
+    
+            marker_17a3df3b6f05eed607511f79dccf4713.bindTooltip(
+                `<div>
+                     London — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_17a3df3b6f05eed607511f79dccf4713.setIcon(icon_e4e722a8754bd5236884ffa18abc34a3);
+            
+    
+            var marker_f5a6a1f432829d31749d7381538bb32a = L.marker(
+                [51.5560247, -0.2796177],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_6b0d62a8f8fbe34e31f33a85fcd18ca7 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3f3ce25029cffa2a7064c0888d68b0e6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_fcb043d33dcd9281683f5571e8c39685 = $(`<div id="html_fcb043d33dcd9281683f5571e8c39685" style="width: 100.0%; height: 100.0%;"><b>Wembley Stadium</b><br>Sentiment: Neutral<br>Title: Bruno Mars&#39; Romantic Tour Concert at Wembley Stadium, London, England</div>`)[0];
+                popup_3f3ce25029cffa2a7064c0888d68b0e6.setContent(html_fcb043d33dcd9281683f5571e8c39685);
+            
+        
+
+        marker_f5a6a1f432829d31749d7381538bb32a.bindPopup(popup_3f3ce25029cffa2a7064c0888d68b0e6)
+        ;
+
+        
+    
+    
+            marker_f5a6a1f432829d31749d7381538bb32a.bindTooltip(
+                `<div>
+                     Wembley Stadium — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_f5a6a1f432829d31749d7381538bb32a.setIcon(icon_6b0d62a8f8fbe34e31f33a85fcd18ca7);
+            
+    
+            var marker_99e78f9d9691c4037b136cda204f38b1 = L.marker(
+                [51.8964264, -2.0743111],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_7529fedccfcccc2dffa9bc7c1ccedcb2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_eb6f8c81902673cc2e2514f9883d93ef = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4ca3179ea6a321e2c8dfd11ab49e00af = $(`<div id="html_4ca3179ea6a321e2c8dfd11ab49e00af" style="width: 100.0%; height: 100.0%;"><b>Cheltenham</b><br>Sentiment: Neutral<br>Title: England v Norway - Americans Watching World Cup in a Pub in England for the first time</div>`)[0];
+                popup_eb6f8c81902673cc2e2514f9883d93ef.setContent(html_4ca3179ea6a321e2c8dfd11ab49e00af);
+            
+        
+
+        marker_99e78f9d9691c4037b136cda204f38b1.bindPopup(popup_eb6f8c81902673cc2e2514f9883d93ef)
+        ;
+
+        
+    
+    
+            marker_99e78f9d9691c4037b136cda204f38b1.bindTooltip(
+                `<div>
+                     Cheltenham — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_99e78f9d9691c4037b136cda204f38b1.setIcon(icon_7529fedccfcccc2dffa9bc7c1ccedcb2);
+            
+    
+            var marker_743c8ef832f810701eb96bb35f793622 = L.marker(
+                [51.5072178, -0.1275862],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_5a43a3bda0f1f872a3dfbeef531d0c38 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f38d95702f596f83dbca9d8597a52aea = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_54222e6697f950c6940c57abbe2702f1 = $(`<div id="html_54222e6697f950c6940c57abbe2702f1" style="width: 100.0%; height: 100.0%;"><b>London</b><br>Sentiment: Celebratory<br>Title: Best London Street Food at Borough Market (1,000 Years Old!!)</div>`)[0];
+                popup_f38d95702f596f83dbca9d8597a52aea.setContent(html_54222e6697f950c6940c57abbe2702f1);
+            
+        
+
+        marker_743c8ef832f810701eb96bb35f793622.bindPopup(popup_f38d95702f596f83dbca9d8597a52aea)
+        ;
+
+        
+    
+    
+            marker_743c8ef832f810701eb96bb35f793622.bindTooltip(
+                `<div>
+                     London — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_743c8ef832f810701eb96bb35f793622.setIcon(icon_5a43a3bda0f1f872a3dfbeef531d0c38);
+            
+    
+            var marker_31583700bc6106af848abb9094e47627 = L.marker(
+                [52.9540223, -1.1549892],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_15a5b15f2120901972e9a939d5090324 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0506e96f7e2810df7cd9c02d7ce698e9 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_19538cfbeceb282654f6dfe97f54de18 = $(`<div id="html_19538cfbeceb282654f6dfe97f54de18" style="width: 100.0%; height: 100.0%;"><b>Nottingham</b><br>Sentiment: Celebratory<br>Title: Brompton Bike Ride + CRAZY Pub Atmosphere | England vs Norway | World Cup 2026. England</div>`)[0];
+                popup_0506e96f7e2810df7cd9c02d7ce698e9.setContent(html_19538cfbeceb282654f6dfe97f54de18);
+            
+        
+
+        marker_31583700bc6106af848abb9094e47627.bindPopup(popup_0506e96f7e2810df7cd9c02d7ce698e9)
+        ;
+
+        
+    
+    
+            marker_31583700bc6106af848abb9094e47627.bindTooltip(
+                `<div>
+                     Nottingham — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_31583700bc6106af848abb9094e47627.setIcon(icon_15a5b15f2120901972e9a939d5090324);
+            
+    
+            var marker_4906916add36112a9c335a83f2ed9dbf = L.marker(
+                [53.4083714, -2.9915726],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_06f6adc72c261d9f4032aab093352492 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_082959f4b934c06785128523e24f319f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7d89f8b7ef885b9d4494dec2d2ac9014 = $(`<div id="html_7d89f8b7ef885b9d4494dec2d2ac9014" style="width: 100.0%; height: 100.0%;"><b>Liverpool</b><br>Sentiment: Neutral<br>Title: England 🏴󠁧󠁢󠁥󠁮󠁧󠁿 vs DR Congo 🇨🇩, FIFA World-Cup Vlog, 📍Liverpool</div>`)[0];
+                popup_082959f4b934c06785128523e24f319f.setContent(html_7d89f8b7ef885b9d4494dec2d2ac9014);
+            
+        
+
+        marker_4906916add36112a9c335a83f2ed9dbf.bindPopup(popup_082959f4b934c06785128523e24f319f)
+        ;
+
+        
+    
+    
+            marker_4906916add36112a9c335a83f2ed9dbf.bindTooltip(
+                `<div>
+                     Liverpool — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4906916add36112a9c335a83f2ed9dbf.setIcon(icon_06f6adc72c261d9f4032aab093352492);
+            
+    
+            var marker_a90dbb13eea5d2443b06ca3533895296 = L.marker(
+                [53.4083714, -2.9915726],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_a939ed85ee4da4da532f3953a4115cdb = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_938a8d58f755c013cdd670efd02f31f2 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b72886a90d8c4f25984652e4caa6c644 = $(`<div id="html_b72886a90d8c4f25984652e4caa6c644" style="width: 100.0%; height: 100.0%;"><b>Liverpool</b><br>Sentiment: Neutral<br>Title: England 🏴󠁧󠁢󠁥󠁮󠁧󠁿 vs Argentina 🇦🇷, FIFA World-Cup Vlog, 📍Liverpool</div>`)[0];
+                popup_938a8d58f755c013cdd670efd02f31f2.setContent(html_b72886a90d8c4f25984652e4caa6c644);
+            
+        
+
+        marker_a90dbb13eea5d2443b06ca3533895296.bindPopup(popup_938a8d58f755c013cdd670efd02f31f2)
+        ;
+
+        
+    
+    
+            marker_a90dbb13eea5d2443b06ca3533895296.bindTooltip(
+                `<div>
+                     Liverpool — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a90dbb13eea5d2443b06ca3533895296.setIcon(icon_a939ed85ee4da4da532f3953a4115cdb);
+            
+    
+            var marker_456dad4962fb35368c3d709ffb15e3da = L.marker(
+                [53.4083714, -2.9915726],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_bf40e7537291b9185c335bbded2d1bb3 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5d9968498bdc4358158ed1724cc65f3f = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_0b0ab373c2436f13af9b62e34bf44e64 = $(`<div id="html_0b0ab373c2436f13af9b62e34bf44e64" style="width: 100.0%; height: 100.0%;"><b>Liverpool</b><br>Sentiment: Neutral<br>Title: England 🏴󠁧󠁢󠁥󠁮󠁧󠁿 vs Ghana 🇬🇭, FIFA World-Cup Vlog, 📍 Liverpool</div>`)[0];
+                popup_5d9968498bdc4358158ed1724cc65f3f.setContent(html_0b0ab373c2436f13af9b62e34bf44e64);
+            
+        
+
+        marker_456dad4962fb35368c3d709ffb15e3da.bindPopup(popup_5d9968498bdc4358158ed1724cc65f3f)
+        ;
+
+        
+    
+    
+            marker_456dad4962fb35368c3d709ffb15e3da.bindTooltip(
+                `<div>
+                     Liverpool — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_456dad4962fb35368c3d709ffb15e3da.setIcon(icon_bf40e7537291b9185c335bbded2d1bb3);
+            
+    
+            var marker_daf41726ac8137f915b2473f57fb5206 = L.marker(
+                [53.4083714, -2.9915726],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_d8e2516196436d889d22eae71058e07a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_9f70bfee01651e670f84cfd214c99dd6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_6c3ed97693126a4ea434290e2b0d5f98 = $(`<div id="html_6c3ed97693126a4ea434290e2b0d5f98" style="width: 100.0%; height: 100.0%;"><b>Liverpool</b><br>Sentiment: Neutral<br>Title: England 🏴󠁧󠁢󠁥󠁮󠁧󠁿 vs Mexico 🇲🇽, FIFA World-Cup Vlog, 📍Liverpool</div>`)[0];
+                popup_9f70bfee01651e670f84cfd214c99dd6.setContent(html_6c3ed97693126a4ea434290e2b0d5f98);
+            
+        
+
+        marker_daf41726ac8137f915b2473f57fb5206.bindPopup(popup_9f70bfee01651e670f84cfd214c99dd6)
+        ;
+
+        
+    
+    
+            marker_daf41726ac8137f915b2473f57fb5206.bindTooltip(
+                `<div>
+                     Liverpool — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_daf41726ac8137f915b2473f57fb5206.setIcon(icon_d8e2516196436d889d22eae71058e07a);
+            
+    
+            var marker_8f4a6a4b74c90743e70a0b3f04280e17 = L.marker(
+                [53.4083714, -2.9915726],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_2783080471e33e713e45d2b1565587f5 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_98e62f81372d7b2164cce3e1f4967e65 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f455b17d037139341f2240a39a9537d0 = $(`<div id="html_f455b17d037139341f2240a39a9537d0" style="width: 100.0%; height: 100.0%;"><b>Liverpool</b><br>Sentiment: Neutral<br>Title: England 🏴󠁧󠁢󠁥󠁮󠁧󠁿 vs Panama 🇵🇦, FIFA World-Cup Vlog, 📍Liverpool</div>`)[0];
+                popup_98e62f81372d7b2164cce3e1f4967e65.setContent(html_f455b17d037139341f2240a39a9537d0);
+            
+        
+
+        marker_8f4a6a4b74c90743e70a0b3f04280e17.bindPopup(popup_98e62f81372d7b2164cce3e1f4967e65)
+        ;
+
+        
+    
+    
+            marker_8f4a6a4b74c90743e70a0b3f04280e17.bindTooltip(
+                `<div>
+                     Liverpool — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_8f4a6a4b74c90743e70a0b3f04280e17.setIcon(icon_2783080471e33e713e45d2b1565587f5);
+            
+    
+            var marker_a83c9f136bec4bc2a0905c5e610a3c3b = L.marker(
+                [53.4083714, -2.9915726],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_dc5f95e5c39a94f12579baf2dfb31a90 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "gray",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_181d04247456cdd5af045aaedf652c79 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_d0bd4a17b7a030cb65122c86104185a5 = $(`<div id="html_d0bd4a17b7a030cb65122c86104185a5" style="width: 100.0%; height: 100.0%;"><b>Liverpool</b><br>Sentiment: Neutral<br>Title: England 🏴󠁧󠁢󠁥󠁮󠁧󠁿 vs Norway 🇳🇴, FIFA World-Cup Vlog, 📍Liverpool</div>`)[0];
+                popup_181d04247456cdd5af045aaedf652c79.setContent(html_d0bd4a17b7a030cb65122c86104185a5);
+            
+        
+
+        marker_a83c9f136bec4bc2a0905c5e610a3c3b.bindPopup(popup_181d04247456cdd5af045aaedf652c79)
+        ;
+
+        
+    
+    
+            marker_a83c9f136bec4bc2a0905c5e610a3c3b.bindTooltip(
+                `<div>
+                     Liverpool — neutral
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a83c9f136bec4bc2a0905c5e610a3c3b.setIcon(icon_dc5f95e5c39a94f12579baf2dfb31a90);
+            
+    
+            var marker_bfc35d406d1aab288914c821c870c7f5 = L.marker(
+                [51.5560247, -0.2796177],
+                {
+}
+            ).addTo(marker_cluster_27a63af92ed21754426a0651f1a87637);
+        
+    
+            var icon_ae21166c9c39b72e66179b1550ac4d2f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "green",
+  "iconColor": "white",
+  "icon": "youtube",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_f7e7993f73c087b2bc9093f4db73d2ca = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_b287b77c33c1faf79cdc9db7ce6c486a = $(`<div id="html_b287b77c33c1faf79cdc9db7ce6c486a" style="width: 100.0%; height: 100.0%;"><b>Wembley Stadium</b><br>Sentiment: Celebratory<br>Title: It&#39;s Coming Home | Ed Sheeran | Three Lions | Lightning Seeds | Inspired | Official Music Video</div>`)[0];
+                popup_f7e7993f73c087b2bc9093f4db73d2ca.setContent(html_b287b77c33c1faf79cdc9db7ce6c486a);
+            
+        
+
+        marker_bfc35d406d1aab288914c821c870c7f5.bindPopup(popup_f7e7993f73c087b2bc9093f4db73d2ca)
+        ;
+
+        
+    
+    
+            marker_bfc35d406d1aab288914c821c870c7f5.bindTooltip(
+                `<div>
+                     Wembley Stadium — celebratory
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bfc35d406d1aab288914c821c870c7f5.setIcon(icon_ae21166c9c39b72e66179b1550ac4d2f);
+            
+    
+            marker_cluster_27a63af92ed21754426a0651f1a87637.addTo(map_587459937c6919e9474dbc8190c8fe4f);
+        
+    
+            var layer_control_13da6764b4e093b7c54cc49e76be279f_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_07b5a3a4ae29789a7f3212664a8494d8,
+                },
+                overlays :  {
+                    "England fan videos" : marker_cluster_27a63af92ed21754426a0651f1a87637,
+                },
+            };
+            let layer_control_13da6764b4e093b7c54cc49e76be279f = L.control.layers(
+                layer_control_13da6764b4e093b7c54cc49e76be279f_layers.base_layers,
+                layer_control_13da6764b4e093b7c54cc49e76be279f_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_587459937c6919e9474dbc8190c8fe4f);
+
+        
+</script>
+</html>
